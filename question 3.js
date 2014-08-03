@@ -59,13 +59,13 @@ $(document).ready(function() {
       width: 400,
       modal: false,
       resizable: false,
- 	  show: "fade",
+ 	    show: "fade",
  	  //close: "disable",
       buttons: {
         "Start the stopwatch": function() {
           var bValid = true;
           allFields.removeClass( "ui-state-error" );
-          bValid = bValid && checkLength( number, 1, 8 );
+          bValid = bValid && checkLength( number, 1, 7 );
           bValid = bValid && checkRegexp( number, /([0-9])+$/i, "Only numbers please!" );
         
           
@@ -110,12 +110,13 @@ $(document).ready(function() {
   // input windows
   
 
-    	var ctx = document.getElementById("myCanvas1").getContext("2d");
+    var ctx = document.getElementById("myCanvas1").getContext("2d");
+    //ctx.font = '40pt digi';
 		//ctx.shadowBlur=10;
 		ctx.fillStyle="#000099";
+    ctx.strokeStyle = "black";
 		//ctx.rotate(0.5);
 		ctx.lineWidth = 5;
-		ctx.strokeStyle = "black";
 
 		//ctx.rotate(-0.5);
 		ctx.beginPath();
@@ -135,48 +136,50 @@ $(document).ready(function() {
 		ctx.fill();
 		ctx.stroke();
 
-	    ctx.beginPath();
+	  ctx.beginPath();
 		ctx.rect(997,0,3,100);
 		ctx.fill();
 		ctx.stroke();
 
 		//ctx.fillStyle="white";
 		//ctx.shadowColor="blue";
-	    ctx.font = '32pt Calibri';
-	    ctx.fillText('DAYS,', 115, 60);
-	    ctx.fillText('HOURS,', 305, 60);
-	    ctx.fillText('MINUTES,', 535, 60);
-	    ctx.fillText('SECONDS.', 815, 60);
-	    ctx.font = '40pt digi';
-	    days = Math.floor(countTarget / 86400);
-	    ctx.fillText(days, 5, 60);
-	    hours = Math.floor((countTarget % 86400)/3600);
-		ctx.fillText(hours, 245, 60);
+	  ctx.font = '32pt Calibri';
+	  ctx.fillText('DAYS,', 115, 60);
+	  ctx.fillText('HOURS,', 305, 60);
+	  ctx.fillText('MINUTES,', 535, 60);
+	  ctx.fillText('SECONDS.', 815, 60);
+    ctx.shadowBlur=0;
+	  ctx.font = '40pt digi';
+    ctx.fillStyle="black";
+	  days = Math.floor(countTarget / 86400);
+	  ctx.fillText(days, 5, 60);
+	  hours = Math.floor((countTarget % 86400)/3600);
+		ctx.fillText(hours, 235, 60);
 		minutes = Math.floor(((countTarget % 86400) % 3600)/60);
-        ctx.fillText(minutes, 475, 60);	
-        seconds = ((countTarget % 86400) % 3600) % 60;
-        ctx.fillText(seconds, 755, 60);
+    ctx.fillText(minutes, 465, 60);	
+    seconds = ((countTarget % 86400) % 3600) % 60;
+    ctx.fillText(seconds, 745, 60);
 		//ctx.shadowBlur=0;
 
-var pause = 0;
-   $("#buttonSP1").click(function(){
-   	if (pause == 0)
-   	{	
-	pause = 1;
-	document.getElementById("buttonSP1").innerHTML = "Start";
-	//document.getElementById("buttonSP1").style.borderColor = "orange";
-	}
-	else 
-	{	
-	pause = 0;
-	document.getElementById("buttonSP1").innerHTML = "Pause";
-	//document.getElementById("buttonSP1").style.borderColor = "orange";
-	}
-});
+    var pause = 0;
+    $("#buttonSP1").click(function(){
+    if (pause == 0)
+    {	
+    pause = 1;
+    document.getElementById("buttonSP1").innerHTML = "Start";
+    //document.getElementById("buttonSP1").style.borderColor = "orange";
+    }
+    else 
+    {	
+    pause = 0;
+    document.getElementById("buttonSP1").innerHTML = "Pause";
+    //document.getElementById("buttonSP1").style.borderColor = "orange";
+    }
+    });
 
    $("#buttonR1").click(function(){
    	document.getElementById("buttonSP1").innerHTML = "Start";
-   	    	 $("#buttonSP1").prop("disabled",false);	
+   	$("#buttonSP1").prop("disabled",false);	
     countTarget = value;
     pause = 1;
 });
@@ -188,32 +191,35 @@ var pause = 0;
     var spD = 0;
 
 		/*myVar =*/	setInterval(function(){ 
-       		   ctx.fillStyle="white";
-       		   ctx.fillRect(755,23,57,42);
-       		   //var img="http://us.cdn2.123rf.com/168nwm/pzaxe/pzaxe1302/pzaxe130200084/17924384-vector-seamless-pattern--the-simple-gray-abstract-background.jpg";
-       		   //var img=document.getElementById("scream");
-			   //ctx.drawImage("url(http://us.cdn2.123rf.com/168nwm/pzaxe/pzaxe1302/pzaxe130200084/17924384-vector-seamless-pattern--the-simple-gray-abstract-background.jpg)",755,23,57,42);
-               seconds = ((countTarget % 86400) % 3600) % 60;
-        	   ctx.fillStyle="black";
-     		   ctx.fillText(seconds, 755, 60);
-        
-        if (countTarget > 0 && pause == 0)
-        {	
-        countTarget--;
-    	}
-    	else if (countTarget == 0)
-    	 $("#buttonSP1").prop("disabled",true);	
+     	ctx.fillStyle="white";
+      ctx.fillRect(745,20,65,45);
+     	//ctx.fillRect(745,21,65,50);
+     	//var img="http://us.cdn2.123rf.com/168nwm/pzaxe/pzaxe1302/pzaxe130200084/17924384-vector-seamless-pattern--the-simple-gray-abstract-background.jpg";
+     	//var img=document.getElementById("scream");
+		 //ctx.drawImage("url(http://us.cdn2.123rf.com/168nwm/pzaxe/pzaxe1302/pzaxe130200084/17924384-vector-seamless-pattern--the-simple-gray-abstract-background.jpg)",755,23,57,42);
+      seconds = ((countTarget % 86400) % 3600) % 60;
+      ctx.fillStyle="black";
+   		ctx.fillText(seconds, 745, 60);
+      
+      if (countTarget > 0 && pause == 0)
+      {	
+      countTarget--;
+  	  }
+  	  else if (countTarget == 0)
+  	  $("#buttonSP1").prop("disabled",true);	
+      
     }, speed);
 
 	
  
 		setInterval(function(){ 
-	        ctx.fillStyle="white";
-       		ctx.fillRect(475,23,57,42);
-       		minutes = Math.floor(((countTarget % 86400) % 3600)/60);
-       		ctx.fillStyle="black";
-            ctx.fillText(minutes, 475, 60);
-         if ( activateM == 0 && seconds == 0)
+     ctx.fillStyle="white";
+     ctx.fillRect(465,20,65,45);
+ 		 //ctx.fillRect(465,21,65,50);
+ 	   minutes = Math.floor(((countTarget % 86400) % 3600)/60);
+ 	 	 ctx.fillStyle="black";
+     ctx.fillText(minutes, 465, 60);
+     if ( activateM == 0 && seconds == 0)
 		 {
 		 activateM = 1;
 		 spM = 0;
@@ -224,33 +230,31 @@ var pause = 0;
 	}, spM);
  
 
-
 	setInterval(function(){ 
 		ctx.fillStyle="white";
-        ctx.fillRect(245,23,57,42);
-	    hours = Math.floor((countTarget % 86400)/3600);
-        ctx.fillStyle="black";
-		ctx.fillText(hours, 245, 60);
-         if ( activateH == 0 && minutes == 0)
-		 {
-		 activateH = 1;
-		 spH = 0;
-		 }
-		 else 
-		 spH = speed*3600;
+    ctx.fillRect(235,20,65,45);
+	  hours = Math.floor((countTarget % 86400)/3600);
+    ctx.fillStyle="black";
+		ctx.fillText(hours, 235, 60);
+    if ( activateH == 0 && minutes == 0)
+		{
+		activateH = 1;
+		spH = 0;
+		}
+		else 
+		spH = speed*3600;
 
 	}, spH);
 
 
-
 setInterval(function(){ 
     ctx.fillStyle="white";
-    ctx.fillRect(5,23,92,42);
+    ctx.fillRect(5,20,100,45);
     days = Math.floor(countTarget / 86400);
     ctx.fillStyle="black";
-	ctx.fillText(days, 5, 60);
+	  ctx.fillText(days, 5, 60);
 
-	     if ( activateD == 0 && hours == 0)
+	   if ( activateD == 0 && hours == 0)
 		 {
 		 activateD = 1;
 		 spD = 0;
@@ -261,15 +265,15 @@ setInterval(function(){
 	}, spD);
  
 
-  var current = 0;
-  var target_days = 0;
-  var target_hours = 0;
-  var target_minutes = 0;
-  var target_seconds = 0;
+    var current = 0;
+    var target_days = 0;
+    var target_hours = 0;
+    var target_minutes = 0;
+    var target_seconds = 0;
 
-        var ctx2 = document.getElementById("myCanvas2").getContext("2d");
+    var ctx2 = document.getElementById("myCanvas2").getContext("2d");
 		//ctx2.shadowBlur=10;
-		ctx2.fillStyle="blue";
+		//ctx2.fillStyle="blue";
 		//ctx22.shadowColor="blue";
 		ctx2.fillStyle="#000099";
 		//ctx2.rotate(0.5);
@@ -294,33 +298,33 @@ setInterval(function(){
 		ctx2.fill();
 		ctx2.stroke();
 		
-	    ctx2.beginPath();
+	  ctx2.beginPath();
 		ctx2.rect(997,0,3,100);
 		ctx2.fill();
 		ctx2.stroke();
 
-	    ctx2.font = '32pt Calibri';
-	    ctx2.fillText('DAYS,', 115, 60);
-	    ctx2.fillText('HOURS,', 305, 60);
-	    ctx2.fillText('MINUTES,', 535, 60);
-	    ctx2.fillText('SECONDS.', 815, 60);
-	    ctx2.shadowBlur=0;
-	    ctx2.font = '40pt digi';
-	    target_days = Math.floor(current / 86400);
-	    ctx2.fillText(target_days, 5, 60);
-	    target_hours = Math.floor((current % 86400)/3600);
-		ctx2.fillText(target_hours, 245, 60);
-		target_minutes = Math.floor(((current % 86400) % 3600)/60);
-        ctx2.fillText(target_minutes, 475, 60);	
-        target_seconds = ((current % 86400) % 3600) % 60;
-        ctx2.fillText(target_seconds, 755, 60);
-		//ctx2.shadowBlur=0;
+    ctx2.font = '32pt Calibri';
+    ctx2.fillText('DAYS,', 115, 60);
+    ctx2.fillText('HOURS,', 305, 60);
+    ctx2.fillText('MINUTES,', 535, 60);
+    ctx2.fillText('SECONDS.', 815, 60);
+    ctx2.shadowBlur=0;
+    ctx2.font = '40pt digi';
+    target_days = Math.floor(current / 86400);
+    ctx2.fillText(target_days, 5, 60);
+    target_hours = Math.floor((current % 86400)/3600);
+	  ctx2.fillText(target_hours, 235, 60);
+	  target_minutes = Math.floor(((current % 86400) % 3600)/60);
+    ctx2.fillText(target_minutes, 465, 60);	
+    target_seconds = ((current % 86400) % 3600) % 60;
+    ctx2.fillText(target_seconds, 745, 60);
+	  //ctx2.shadowBlur=0;
 
 
 var pause2 = 0;
-   $("#buttonSP2").click(function(){
-   	if (pause2 == 0)
-   	{	
+$("#buttonSP2").click(function(){
+  if (pause2 == 0)
+  {	
 	pause2 = 1;
 	document.getElementById("buttonSP2").innerHTML = "Start";
 	//document.getElementById("buttonSP2").style.borderColor = "orange";
@@ -348,29 +352,29 @@ var pause2 = 0;
     var spD2 = 0;
 
 		/*myVar2 =*/	setInterval(function(){ 
-       		   ctx2.fillStyle="white";
-       		   ctx2.fillRect(755,23,57,42);
-               target_seconds = ((current % 86400) % 3600) % 60;
-        	   ctx2.fillStyle="black";
-     		   ctx2.fillText(target_seconds, 755, 60);
-        
-        if ( current < value && pause2 == 0)
-        {	
-        current++;
+      ctx2.fillStyle="white";
+   		ctx2.fillRect(745,20,65,45);
+      target_seconds = ((current % 86400) % 3600) % 60;
+    	ctx2.fillStyle="black";
+  		ctx2.fillText(target_seconds, 745, 60);
+    
+      if ( current < value && pause2 == 0)
+      {	
+      current++;
     	}
-    	else if (current == value)
-    	$("#buttonSP2").prop("disabled",true);	
+      else if (current == value)
+      $("#buttonSP2").prop("disabled",true);	
+
     }, speed);
 
 	
- 
 		setInterval(function(){ 
-	        ctx2.fillStyle="white";
-       		ctx2.fillRect(475,23,57,42);
-       		target_minutes = Math.floor(((current % 86400) % 3600)/60);
-       		ctx2.fillStyle="black";
-            ctx2.fillText(target_minutes, 475, 60);
-         if ( activateM2 == 0 && target_seconds == 0)
+     ctx2.fillStyle="white";
+ 		 ctx2.fillRect(465,20,65,45);
+ 		 target_minutes = Math.floor(((current % 86400) % 3600)/60);
+ 		 ctx2.fillStyle="black";
+     ctx2.fillText(target_minutes, 465, 60);
+     if ( activateM2 == 0 && target_seconds == 0)
 		 {
 		 activateM2 = 1;
 		 spM2 = 0;
@@ -381,14 +385,13 @@ var pause2 = 0;
 	}, spM2);
  
 
-
 	setInterval(function(){ 
 		ctx2.fillStyle="white";
-        ctx2.fillRect(245,23,57,42);
-	    target_hours = Math.floor((current % 86400)/3600);
-        ctx2.fillStyle="black";
-		ctx2.fillText(target_hours, 245, 60);
-         if ( activateH2 == 0 && target_minutes == 0)
+    ctx2.fillRect(235,20,65,45);
+	  target_hours = Math.floor((current % 86400)/3600);
+    ctx2.fillStyle="black";
+		ctx2.fillText(target_hours, 235, 60);
+    if ( activateH2 == 0 && target_minutes == 0)
 		 {
 		 activateH2 = 1;
 		 spH2 = 0;
@@ -399,24 +402,21 @@ var pause2 = 0;
 	}, spH2);
 
 
-
 setInterval(function(){ 
     ctx2.fillStyle="white";
-    ctx2.fillRect(5,23,87,42);
+    ctx2.fillRect(5,20,100,45);
     target_days = Math.floor(current / 86400);
     ctx2.fillStyle="black";
-	ctx2.fillText(target_days, 5, 60);
-	     if ( activateD2 == 0 && target_hours == 0)
-		 {
-		 activateD2 = 1;
-		 spD2 = 0;
-		 }
-		 else 
-		 spD2 = speed*86400;
+	  ctx2.fillText(target_days, 5, 60);
+	  if ( activateD2 == 0 && target_hours == 0)
+		{
+		activateD2 = 1;
+		spD2 = 0;
+		}
+		else 
+		spD2 = speed*86400;
 
 	}, spD2);
-
-
-    }
+ }
 });
 
